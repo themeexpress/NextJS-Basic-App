@@ -6,7 +6,14 @@ interface User {
 }
 
 const UsersPage = async () => {
-    const res = await fetch("https://jsonplaceholder.typicode.com/users");
+    const res = await fetch(
+        "https://jsonplaceholder.typicode.com/users",
+        // cache system
+        // If I don't want to cache
+        // {cache: 'no-store'}
+        //if want to store cache then 
+        {next: { revalidate: 10 }}
+        );
     if (!res.ok){
         throw new Error('Failed to fetch data')
     }
